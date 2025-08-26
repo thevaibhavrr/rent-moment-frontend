@@ -301,22 +301,7 @@ export default function ProductPage({ params }: ProductPageProps) {
            {/* Product Details */}
            <div className="space-y-6">
              {/* Product Title and Rating */}
-             <div>
-               <h1 className="text-3xl font-bold text-gray-900 mb-2">{product.name}</h1>
-               <div className="flex items-center space-x-2 mb-4">
-                 <div className="flex items-center">
-                   {[...Array(5)].map((_, i) => (
-                     <Star
-                       key={i}
-                       className={`w-4 h-4 ${
-                         i < Math.floor(product.rating || 0) ? 'text-yellow-400 fill-current' : 'text-gray-300'
-                       }`}
-                     />
-                   ))}
-                 </div>
-                 <span className="text-sm text-gray-600">({product.numReviews || 0} reviews)</span>
-               </div>
-             </div>
+             
 
              {/* Price */}
              <div className="space-y-2">
