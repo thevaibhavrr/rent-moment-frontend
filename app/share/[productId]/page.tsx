@@ -257,19 +257,7 @@ export default async function SharePage({ params }: SharePageProps) {
             {/* Product Details */}
             <div className="p-8">
               {/* Rating and Reviews */}
-              <div className="flex items-center space-x-2 mb-6">
-                <div className="flex items-center">
-                  {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className={`w-5 h-5 ${
-                        i < Math.floor(product.rating || 0) ? 'text-yellow-400 fill-current' : 'text-gray-300'
-                      }`}
-                    />
-                  ))}
-                </div>
-                <span className="text-gray-600">({product.numReviews || 0} reviews)</span>
-              </div>
+          
 
               {/* Product Info Grid */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
