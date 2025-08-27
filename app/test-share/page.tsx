@@ -25,7 +25,7 @@ export default function TestSharePage() {
 
   const generateShareUrl = (slug: string) => {
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://rent-moment.belivmart.com';
-    return `${baseUrl}/share/${slug}`;
+    return `${baseUrl}/product/${slug}`;
   };
 
   const testMetaTags = (url: string) => {
@@ -57,10 +57,10 @@ export default function TestSharePage() {
                   </div>
                   <div className="space-y-2">
                     <Link
-                      href={`/share/${product.slug}`}
+                      href={`/product/${product.slug}`}
                       className="block bg-blue-500 text-white px-4 py-2 rounded text-sm hover:bg-blue-600"
                     >
-                      View Share Page
+                      View Product Page
                     </Link>
                     <button
                       onClick={() => testMetaTags(generateShareUrl(product.slug))}
@@ -87,7 +87,7 @@ export default function TestSharePage() {
                 type="text"
                 value={testUrl}
                 onChange={(e) => setTestUrl(e.target.value)}
-                placeholder="https://rent-moment.belivmart.com/share/product-slug"
+                placeholder="https://rent-moment.belivmart.com/product/product-slug"
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>

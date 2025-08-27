@@ -9,8 +9,8 @@ The sharing feature creates special product links that display both the product 
 ## How It Works
 
 ### 1. Share URLs
-- **Format**: `/share/{productSlug}`
-- **Example**: `https://rent-moment.belivmart.com/share/designer-lehenga-1`
+- **Format**: `/product/{productSlug}`
+- **Example**: `https://rent-moment.belivmart.com/product/designer-lehenga-1`
 
 ### 2. Open Graph Meta Tags
 The sharing pages include comprehensive Open Graph meta tags that provide:
@@ -85,7 +85,7 @@ Users can click the share icon on product cards in listings to:
 - Share directly to WhatsApp
 
 ### 3. Direct Link Sharing
-Users can share the `/share/{productSlug}` URL directly, which will show:
+Users can share the `/product/{productSlug}` URL directly, which will show:
 - Product image
 - Product title and price
 - Description

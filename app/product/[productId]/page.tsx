@@ -125,6 +125,70 @@ export default function ProductPage({ params }: ProductPageProps) {
      loadProduct();
    }, [params]);
 
+   // Update meta tags for social sharing when product loads
+   useEffect(() => {
+     if (product) {
+       const discountPercentage = getDiscountPercentage(product.originalPrice, product.price);
+       const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://rent-moment.belivmart.com';
+       
+       // Ensure image URL is absolute and properly formatted for WhatsApp
+       let imageUrl = `${baseUrl}/logo.png`; // fallback
+       if (product.images && product.images.length > 0) {
+         const firstImage = product.images[0];
+         if (firstImage.startsWith('http')) {
+           // For Cloudinary images, ensure they're optimized for social sharing
+           if (firstImage.includes('cloudinary.com')) {
+             // Add transformation parameters for optimal social media display
+             imageUrl = firstImage.replace('/upload/', '/upload/c_fill,w_1200,h_630,f_auto/');
+           } else {
+             imageUrl = firstImage;
+           }
+         } else {
+           imageUrl = `${baseUrl}${firstImage}`;
+         }
+       }
+
+       // Update document title
+       document.title = `${product.name} - Rent for ₹${product.price} | Rent the Moment`;
+
+       // Update meta tags
+       const updateMetaTag = (name: string, content: string) => {
+         let meta = document.querySelector(`meta[name="${name}"]`) || document.querySelector(`meta[property="${name}"]`);
+         if (!meta) {
+           meta = document.createElement('meta');
+           meta.setAttribute('name', name);
+           document.head.appendChild(meta);
+         }
+         meta.setAttribute('content', content);
+       };
+
+       // Update Open Graph meta tags
+       updateMetaTag('og:title', `${product.name} - Rent for ₹${product.price}`);
+       updateMetaTag('og:description', `${product.description.substring(0, 160)}... Rent this ${product.category.name} for just ₹${product.price}${product.originalPrice > 0 ? ` (${discountPercentage}% OFF)` : ''}.`);
+       updateMetaTag('og:image', imageUrl);
+       updateMetaTag('og:url', `${baseUrl}/product/${product.slug}`);
+       updateMetaTag('og:type', 'website');
+       updateMetaTag('og:site_name', 'Rent the Moment');
+       updateMetaTag('og:image:width', '1200');
+       updateMetaTag('og:image:height', '630');
+       updateMetaTag('og:image:type', 'image/jpeg');
+       updateMetaTag('og:image:secure_url', imageUrl);
+       updateMetaTag('og:image:alt', product.name);
+
+       // Update Twitter Card meta tags
+       updateMetaTag('twitter:card', 'summary_large_image');
+       updateMetaTag('twitter:title', `${product.name} - Rent for ₹${product.price}`);
+       updateMetaTag('twitter:description', `${product.description.substring(0, 160)}... Rent this ${product.category.name} for just ₹${product.price}${product.originalPrice > 0 ? ` (${discountPercentage}% OFF)` : ''}.`);
+       updateMetaTag('twitter:image', imageUrl);
+       updateMetaTag('twitter:image:alt', product.name);
+       updateMetaTag('twitter:site', '@rentthemoment');
+       updateMetaTag('twitter:creator', '@rentthemoment');
+
+       // Update description meta tag
+       updateMetaTag('description', `${product.description.substring(0, 160)}... Rent this ${product.category.name} for just ₹${product.price}${product.originalPrice > 0 ? ` (${discountPercentage}% OFF)` : ''}.`);
+     }
+   }, [product]);
+
    if (loading) {
      return (
        <div className="bg-gray-50 min-h-screen flex items-center justify-center">
