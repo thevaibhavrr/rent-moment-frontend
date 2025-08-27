@@ -140,28 +140,8 @@ export default function Header() {
                 </motion.span>
               )}
             </Link>
-            <Link
-              href="tel:9926503468"
-              className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-all duration-200 font-bold shadow-lg flex items-center"
-            >
-              <Phone className="w-4 h-4 mr-2" />
-              Call Us
-            </Link>
-            <Link
-              href="https://wa.me/919926503468"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-all duration-200 font-bold shadow-lg flex items-center"
-            >
-              <WhatsAppIcon className="w-4 h-4 mr-2" />
-              WhatsApp
-            </Link>
-            <Link
-              href="/list-item"
-              className="bg-black text-white border border-black px-4 py-2 rounded-lg hover:bg-gray-800 transition-all duration-200 font-bold shadow-lg"
-            >
-              List Item
-            </Link>
+          
+           
           </div>
 
           {/* Mobile Cart Icon */}
