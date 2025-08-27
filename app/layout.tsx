@@ -6,6 +6,7 @@ import { AuthProvider } from "./contexts/AuthContext";
 import { CartProvider } from "./contexts/CartContext";
 import { Toaster } from "react-hot-toast";
 import { Inter } from 'next/font/google';
+import { Analytics } from "@vercel/analytics/next";
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -81,6 +82,7 @@ export default function RootLayout({
                 },
               }}
             />
+            <Analytics />
           </CartProvider>
         </AuthProvider>
       </body>
