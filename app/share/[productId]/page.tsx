@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getProductBySlug } from '../../data/products';
-import { formatPrice, getDiscountPercentage, generateWhatsAppMessage, shareToWhatsApp, generateSocialShareUrls } from '../../utils';
+import { formatPrice, getDiscountPercentage, generateWhatsAppMessage, generateWhatsAppInfoMessage, shareToWhatsApp, generateSocialShareUrls } from '../../utils';
 import { Star, MapPin, Calendar, Clock, Shield, Truck, Heart, Share2, MessageCircle, ShoppingBag, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -17,7 +17,24 @@ interface SharePageProps {
 export async function generateMetadata({ params }: SharePageProps): Promise<Metadata> {
   try {
     const { productId } = await params;
-    const product = await getProductBySlug(productId);
+    let product;
+    
+    // Try to get product by slug first, then by ID if that fails
+    try {
+      product = await getProductBySlug(productId);
+    } catch (error) {
+      // If slug lookup fails, try to get by ID
+      try {
+        const { getProductById } = await import('../../data/products');
+        product = await getProductById(productId);
+      } catch (idError) {
+        console.error('Failed to fetch product by both slug and ID:', error, idError);
+        return {
+          title: 'Product Not Found - Rent the Moment',
+          description: 'The requested product could not be found.',
+        };
+      }
+    }
     
     if (!product) {
       return {
@@ -114,7 +131,21 @@ export async function generateMetadata({ params }: SharePageProps): Promise<Meta
 export default async function SharePage({ params }: SharePageProps) {
   try {
     const { productId } = await params;
-    const product = await getProductBySlug(productId);
+    let product;
+    
+    // Try to get product by slug first, then by ID if that fails
+    try {
+      product = await getProductBySlug(productId);
+    } catch (error) {
+      // If slug lookup fails, try to get by ID
+      try {
+        const { getProductById } = await import('../../data/products');
+        product = await getProductById(productId);
+      } catch (idError) {
+        console.error('Failed to fetch product by both slug and ID:', error, idError);
+        notFound();
+      }
+    }
     
     if (!product || !product.name || !product.category) {
       notFound();
@@ -322,8 +353,8 @@ export default async function SharePage({ params }: SharePageProps) {
                                  <div className="flex justify-center space-x-4">
                    <button
                      onClick={() => {
-                       const message = generateWhatsAppMessage(product);
-                       shareToWhatsApp(message);
+                       const message = generateWhatsAppInfoMessage(product);
+                       shareToWhatsApp(message, '919926503468');
                      }}
                      className="inline-flex items-center px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors"
                    >

@@ -11,7 +11,9 @@ export const generateShareUrl = (productSlug: string, baseUrl?: string): string 
 };
 
 export const generateWhatsAppMessage = (product: any, shareUrl?: string): string => {
-  const url = shareUrl || generateShareUrl(product.slug);
+  // Use product slug if available, otherwise use product ID
+  const productIdentifier = product.slug || product._id || product.id;
+  const url = shareUrl || generateShareUrl(productIdentifier);
   
   return `Check out this amazing ${product.category.name} on Rent the Moment! 
 
@@ -23,7 +25,9 @@ View full details: ${url}`;
 };
 
 export const generateWhatsAppInfoMessage = (product: any, shareUrl?: string): string => {
-  const url = shareUrl || generateShareUrl(product.slug);
+  // Use product slug if available, otherwise use product ID
+  const productIdentifier = product.slug || product._id || product.id;
+  const url = shareUrl || generateShareUrl(productIdentifier);
   
   return `May I know about this dress?
 
@@ -98,7 +102,9 @@ export const copyToClipboard = async (text: string): Promise<void> => {
 };
 
 export const generateSocialShareUrls = (product: any, shareUrl?: string) => {
-  const url = shareUrl || generateShareUrl(product.slug);
+  // Use product slug if available, otherwise use product ID
+  const productIdentifier = product.slug || product._id || product.id;
+  const url = shareUrl || generateShareUrl(productIdentifier);
   const text = `${product.name} - Rent for ₹${product.price} on Rent the Moment`;
   
   return {
