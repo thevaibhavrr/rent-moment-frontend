@@ -13,7 +13,7 @@ export async function GET(request: NextRequest) {
 
   try {
     // This is a simple debug endpoint to check environment variables
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://rent-the-moment.vercel.app';
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://rent-moment.belivmart.com';
     const shareUrl = `${baseUrl}/share/${productId}`;
     
     return NextResponse.json({

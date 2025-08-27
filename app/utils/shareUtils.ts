@@ -6,7 +6,7 @@ export interface ShareOptions {
 }
 
 export const generateShareUrl = (productSlug: string, baseUrl?: string): string => {
-  const base = baseUrl || (typeof window !== 'undefined' ? window.location.origin : 'https://rent-the-moment.vercel.app');
+  const base = baseUrl || (typeof window !== 'undefined' ? window.location.origin : 'https://rent-moment.belivmart.com');
   return `${base}/share/${productSlug}`;
 };
 

@@ -24,7 +24,7 @@ export default function TestSharePage() {
   ];
 
   const generateShareUrl = (slug: string) => {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://rent-the-moment.vercel.app';
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://rent-moment.belivmart.com';
     return `${baseUrl}/share/${slug}`;
   };
 
@@ -87,7 +87,7 @@ export default function TestSharePage() {
                 type="text"
                 value={testUrl}
                 onChange={(e) => setTestUrl(e.target.value)}
-                placeholder="https://rent-the-moment.vercel.app/share/product-slug"
+                placeholder="https://rent-moment.belivmart.com/share/product-slug"
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>

@@ -46,7 +46,7 @@ export async function generateMetadata({ params }: SharePageProps): Promise<Meta
     const discountPercentage = getDiscountPercentage(product.originalPrice, product.price);
     
     // Ensure image URL is absolute and properly formatted for WhatsApp
-    let imageUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'https://rent-the-moment.vercel.app'}/logo.png`; // fallback
+    let imageUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'https://rent-moment.belivmart.com'}/logo.png`; // fallback
     if (product.images && product.images.length > 0) {
       const firstImage = product.images[0];
       if (firstImage.startsWith('http')) {
@@ -58,7 +58,7 @@ export async function generateMetadata({ params }: SharePageProps): Promise<Meta
           imageUrl = firstImage;
         }
       } else {
-        imageUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'https://rent-the-moment.vercel.app'}${firstImage}`;
+        imageUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'https://rent-moment.belivmart.com'}${firstImage}`;
       }
     }
     
@@ -73,7 +73,7 @@ export async function generateMetadata({ params }: SharePageProps): Promise<Meta
         title: `${product.name} - Rent for ₹${product.price}`,
         description: `${product.description.substring(0, 160)}... Rent this ${product.category.name} for just ₹${product.price}${product.originalPrice > 0 ? ` (${discountPercentage}% OFF)` : ''}.`,
         type: 'website',
-        url: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://rent-the-moment.vercel.app'}/share/${productId}`,
+        url: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://rent-moment.belivmart.com'}/share/${productId}`,
         siteName: 'Rent the Moment',
         images: [
           {
@@ -101,7 +101,7 @@ export async function generateMetadata({ params }: SharePageProps): Promise<Meta
         'og:site_name': 'Rent the Moment',
         'og:locale': 'en_US',
         'og:type': 'website',
-        'og:url': `${process.env.NEXT_PUBLIC_BASE_URL || 'https://rent-the-moment.vercel.app'}/share/${productId}`,
+        'og:url': `${process.env.NEXT_PUBLIC_BASE_URL || 'https://rent-moment.belivmart.com'}/share/${productId}`,
         
         // Twitter Card tags
         'twitter:image:alt': product.name,
@@ -170,7 +170,7 @@ export default async function SharePage({ params }: SharePageProps) {
             <p>Product Slug: {product.slug}</p>
             <p>Image URLs: {JSON.stringify(product.images)}</p>
             <p>Main Image: {mainImage}</p>
-            <p>Share URL: {`${process.env.NEXT_PUBLIC_BASE_URL || 'https://rent-the-moment.vercel.app'}/share/${productId}`}</p>
+            <p>Share URL: {`${process.env.NEXT_PUBLIC_BASE_URL || 'https://rent-moment.belivmart.com'}/share/${productId}`}</p>
             
             <h4 className="font-bold mt-4">Meta Tags Generated:</h4>
             <div className="bg-white p-2 rounded text-xs">
@@ -180,15 +180,15 @@ export default async function SharePage({ params }: SharePageProps) {
                 product.images[0].includes('cloudinary.com') ? 
                 product.images[0].replace('/upload/', '/upload/c_fill,w_1200,h_630,f_auto/') : 
                 product.images[0] : 
-                `${process.env.NEXT_PUBLIC_BASE_URL || 'https://rent-the-moment.vercel.app'}/logo.png`
+                `${process.env.NEXT_PUBLIC_BASE_URL || 'https://rent-moment.belivmart.com'}/logo.png`
               }</p>
-              <p><strong>og:url:</strong> {`${process.env.NEXT_PUBLIC_BASE_URL || 'https://rent-the-moment.vercel.app'}/share/${productId}`}</p>
+              <p><strong>og:url:</strong> {`${process.env.NEXT_PUBLIC_BASE_URL || 'https://rent-moment.belivmart.com'}/share/${productId}`}</p>
             </div>
             
             <h4 className="font-bold mt-4">Testing Tools:</h4>
             <div className="space-y-2">
               <a 
-                href={`https://developers.facebook.com/tools/debug/?q=${encodeURIComponent(`${process.env.NEXT_PUBLIC_BASE_URL || 'https://rent-the-moment.vercel.app'}/share/${productId}`)}`}
+                href={`https://developers.facebook.com/tools/debug/?q=${encodeURIComponent(`${process.env.NEXT_PUBLIC_BASE_URL || 'https://rent-moment.belivmart.com'}/share/${productId}`)}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block bg-blue-500 text-white px-3 py-1 rounded text-xs"
@@ -196,7 +196,7 @@ export default async function SharePage({ params }: SharePageProps) {
                 Test on Facebook Debugger
               </a>
               <a 
-                href={`https://cards-dev.twitter.com/validator?url=${encodeURIComponent(`${process.env.NEXT_PUBLIC_BASE_URL || 'https://rent-the-moment.vercel.app'}/share/${productId}`)}`}
+                href={`https://cards-dev.twitter.com/validator?url=${encodeURIComponent(`${process.env.NEXT_PUBLIC_BASE_URL || 'https://rent-moment.belivmart.com'}/share/${productId}`)}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block bg-blue-400 text-white px-3 py-1 rounded text-xs"
@@ -204,7 +204,7 @@ export default async function SharePage({ params }: SharePageProps) {
                 Test on Twitter Card Validator
               </a>
               <a 
-                href={`https://www.linkedin.com/post-inspector/inspect/${encodeURIComponent(`${process.env.NEXT_PUBLIC_BASE_URL || 'https://rent-the-moment.vercel.app'}/share/${productId}`)}`}
+                href={`https://www.linkedin.com/post-inspector/inspect/${encodeURIComponent(`${process.env.NEXT_PUBLIC_BASE_URL || 'https://rent-moment.belivmart.com'}/share/${productId}`)}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block bg-blue-600 text-white px-3 py-1 rounded text-xs"

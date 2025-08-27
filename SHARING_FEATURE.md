@@ -10,7 +10,7 @@ The sharing feature creates special product links that display both the product 
 
 ### 1. Share URLs
 - **Format**: `/share/{productSlug}`
-- **Example**: `https://rent-the-moment.vercel.app/share/designer-lehenga-1`
+- **Example**: `https://rent-moment.belivmart.com/share/designer-lehenga-1`
 
 ### 2. Open Graph Meta Tags
 The sharing pages include comprehensive Open Graph meta tags that provide:
@@ -103,7 +103,7 @@ When a user shares a product link on WhatsApp, they will see:
 
 ### Environment Variables
 ```env
-NEXT_PUBLIC_BASE_URL=https://rent-the-moment.vercel.app
+NEXT_PUBLIC_BASE_URL=https://rent-moment.belivmart.com
 ```
 
 ### Image Requirements

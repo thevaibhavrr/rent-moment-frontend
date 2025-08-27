@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     title: "Rent the Moment - Designer Clothing Rental Platform",
     description: "India's premier clothing rental platform. Rent designer lehengas, western dresses, traditional wear, shoes, and accessories for special occasions.",
     type: 'website',
-    url: process.env.NEXT_PUBLIC_BASE_URL || 'https://rent-the-moment.vercel.app',
+            url: process.env.NEXT_PUBLIC_BASE_URL || 'https://rent-moment.belivmart.com',
     siteName: 'Rent the Moment',
     images: [
       {
