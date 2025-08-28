@@ -78,7 +78,7 @@ export default function ProductCard({ product, variant = 'default' }: ProductCar
 
   const handleGetInfo = () => {
     const message = generateWhatsAppInfoMessage(product);
-    shareToWhatsApp(message, '919926503468');
+    shareToWhatsApp(message, '917909921367');
   };
 
   const handleRentNow = () => {
@@ -157,7 +157,7 @@ export default function ProductCard({ product, variant = 'default' }: ProductCar
             onClick={(e) => {
               e.stopPropagation();
               const message = generateWhatsAppInfoMessage(product);
-              shareToWhatsApp(message, '919926503468');
+              shareToWhatsApp(message, '917909921367');
             }}
             className="p-2 bg-white/90 backdrop-blur-sm rounded-full hover:bg-white transition-all duration-200 shadow-lg"
             title="Share on WhatsApp"

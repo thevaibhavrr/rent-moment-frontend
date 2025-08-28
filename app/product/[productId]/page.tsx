@@ -311,7 +311,7 @@ export default function ProductPage({ params }: ProductPageProps) {
                  <button
                    onClick={() => {
                      const message = generateWhatsAppInfoMessage(product);
-                     shareToWhatsApp(message, '919926503468');
+                     shareToWhatsApp(message, '917909921367');
                    }}
                    className="p-2 bg-green-500 text-white rounded-full hover:bg-green-600 transition-colors"
                    title="Share on WhatsApp"
@@ -419,7 +419,7 @@ export default function ProductPage({ params }: ProductPageProps) {
                  whileTap={{ scale: 0.98 }}
                  onClick={() => {
                    const message = generateWhatsAppInfoMessage(product);
-                   shareToWhatsApp(message, '919926503468');
+                   shareToWhatsApp(message, '917909921367');
                  }}
                  className="w-full py-4 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-xl text-lg font-semibold hover:from-green-600 hover:to-green-700 transition-all duration-200 flex items-center justify-center space-x-2"
                >

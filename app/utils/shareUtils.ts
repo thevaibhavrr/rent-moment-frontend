@@ -35,17 +35,12 @@ export const generateWhatsAppInfoMessage = (product: any, shareUrl?: string): st
   const url = shareUrl || generateShareUrl(productIdentifier);
   
   return `May I know about this dress?
-
 *Product Details:*
 • Name: ${product.name}
 • Price: ₹${product.price}${product.originalPrice > 0 ? ` (Original: ₹${product.originalPrice})` : ''}
-• Category: ${product.category.name}
 • Color: ${product.color}
 • Sizes: ${product.sizes.map((s: { size: string }) => s.size).join(', ')}
 • Condition: ${product.condition}
-• Rental Duration: ${product.rentalDuration} days
-• Brand: ${product.brand || 'Not specified'}
-• Rating: ${product.rating || 0}/5 (${product.numReviews || 0} reviews)
 
 *Description:*
 ${product.description}

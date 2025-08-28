@@ -83,7 +83,7 @@ ${order.shippingAddress.country}
 *Rental End:* ${new Date(order.rentalEndDate).toLocaleDateString()}
     `.trim();
 
-    const whatsappUrl = `https://wa.me/919926503468?text=${encodeURIComponent(orderDetails)}`;
+    const whatsappUrl = `https://wa.me/917909921367?text=${encodeURIComponent(orderDetails)}`;
     
     // Try to open WhatsApp with a fallback
     if (typeof window !== 'undefined') {
@@ -205,11 +205,11 @@ ${order.shippingAddress.country}
               </button>
               
               <a
-                href="tel:9926503468"
+                href="tel:7909921367"
                 className="w-full bg-blue-500 text-white py-3 px-4 rounded-lg font-medium hover:bg-blue-600 transition-colors flex items-center justify-center"
               >
                 <Phone className="w-5 h-5 mr-2" />
-                Call Us: 9926503468
+                Call Us: 7909921367
               </a>
 
               <Link
@@ -552,7 +552,7 @@ ${order.shippingAddress.country}
 
               <div className="mt-4 p-4 bg-blue-50 rounded-lg">
                 <p className="text-sm text-blue-800">
-                  <strong>Note:</strong> After placing your order, you can share the order details directly on WhatsApp with our team at 9926503468 for quick confirmation.
+                  <strong>Note:</strong> After placing your order, you can share the order details directly on WhatsApp with our team at 7909921367 for quick confirmation.
                 </p>
               </div>
             </div>

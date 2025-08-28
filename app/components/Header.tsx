@@ -204,7 +204,7 @@ export default function Header() {
                   )}
                 </Link>
                 <Link
-                  href="tel:9926503468"
+                  href="tel:7909921367"
                   onClick={() => setIsMenuOpen(false)}
                   className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-all duration-200 font-bold flex items-center"
                 >
@@ -212,7 +212,7 @@ export default function Header() {
                   Call Us
                 </Link>
                 <Link
-                  href="https://wa.me/919926503468"
+                  href="https://wa.me/917909921367"
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setIsMenuOpen(false)}
