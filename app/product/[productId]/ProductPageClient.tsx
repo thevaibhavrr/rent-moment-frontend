@@ -2,15 +2,15 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { getProductsByCategory } from '../data/products';
-import { formatPrice, formatDate, formatJoinDate, getConditionColor, getDiscountPercentage, generateWhatsAppInfoMessage, shareToWhatsApp } from '../utils';
+import { getProductsByCategory } from '../../data/products';
+import { formatPrice, formatDate, formatJoinDate, getConditionColor, getDiscountPercentage, generateWhatsAppInfoMessage, shareToWhatsApp } from '../../utils';
 import { ArrowLeft, Star, MapPin, Calendar, Clock, Shield, Truck, Heart, Share2, MessageCircle, ShoppingBag } from 'lucide-react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useCart } from '../contexts/CartContext';
-import { isExternalImage, isValidImageUrl, handleImageError } from '../utils/imageUtils';
-import RentModal from '../components/RentModal';
-import ProductCard from '../components/ProductCard';
+import { useCart } from '../../contexts/CartContext';
+import { isExternalImage, isValidImageUrl, handleImageError } from '../../utils/imageUtils';
+import RentModal from '../../components/RentModal';
+import ProductCard from '../../components/ProductCard';
 
 interface ProductPageClientProps {
   product: any;
