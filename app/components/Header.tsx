@@ -96,7 +96,7 @@ export default function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex items-center space-x-8 ms-4">
             <Link href="/" className="text-gray-700 hover:text-yellow-600 transition-colors font-medium">
               Home
             </Link>
