@@ -354,7 +354,7 @@ export default async function SharePage({ params }: SharePageProps) {
                    <button
                      onClick={() => {
                        const message = generateWhatsAppInfoMessage(product);
-                       shareToWhatsApp(message, '917909921367');
+                       shareToWhatsApp(message, '7909921367');
                      }}
                      className="inline-flex items-center px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors"
                    >

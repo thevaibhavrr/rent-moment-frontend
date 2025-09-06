@@ -19,7 +19,7 @@ export const generateWhatsAppMessage = (product: any, shareUrl?: string): string
   // Use product slug if available, otherwise use product ID
   const productIdentifier = product.slug || product._id || product.id;
   const url = shareUrl || generateShareUrl(productIdentifier);
-  
+
   return `Check out this amazing ${product.category.name} on Rent the Moment! 
 
 ${product.name}
@@ -29,11 +29,26 @@ ${product.description.substring(0, 100)}...
 View full details: ${url}`;
 };
 
+export const generateWhatsAppShareMessage = (product: any, shareUrl?: string): string => {
+  // Use product slug if available, otherwise use product ID
+  const productIdentifier = product.slug || product._id || product.id;
+  const url = shareUrl || generateShareUrl(productIdentifier);
+
+  return `Hey, देखो मेने Rent the moment से इसे पसंद किया इसकी डिटेल्स ये रही:
+
+  Name: ${product.name}
+  Price: ₹${product.price}${product.originalPrice > 0 ? ` (Original: ₹${product.originalPrice})` : ''}
+  Description: ${product.description}
+View full details: ${url}`;
+
+
+};
+
 export const generateWhatsAppInfoMessage = (product: any, shareUrl?: string): string => {
   // Use product slug if available, otherwise use product ID
   const productIdentifier = product.slug || product._id || product.id;
   const url = shareUrl || generateShareUrl(productIdentifier);
-  
+
   return `May I know about this dress?
 *Product Details:*
 • Name: ${product.name}
@@ -47,24 +62,25 @@ ${product.description}
 
 *Tags:* ${product.tags.join(', ')}
 
-*Product Link:* ${url}`;
+*Product image:* ${product.images[0]}`;
 };
 
 export const shareToWhatsApp = (message: string, phoneNumber?: string): void => {
   if (typeof window === 'undefined') return;
-  
-  const whatsappUrl = phoneNumber 
+
+  // If no phone number is provided, share with anyone (opens WhatsApp with message ready to send)
+  const whatsappUrl = phoneNumber
     ? `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`
     : `https://wa.me/?text=${encodeURIComponent(message)}`;
-  
+
   window.open(whatsappUrl, '_blank');
 };
 
 export const shareToSocialMedia = (options: ShareOptions): void => {
   if (typeof window === 'undefined') return;
-  
+
   const { title, text, url, hashtags = [] } = options;
-  
+
   // Try to use native sharing API first
   if (navigator.share) {
     navigator.share({
@@ -84,7 +100,7 @@ export const shareToSocialMedia = (options: ShareOptions): void => {
 
 export const copyToClipboard = async (text: string): Promise<void> => {
   if (typeof window === 'undefined') return;
-  
+
   try {
     await navigator.clipboard.writeText(text);
     // You can add a toast notification here
@@ -106,7 +122,7 @@ export const generateSocialShareUrls = (product: any, shareUrl?: string) => {
   const productIdentifier = product.slug || product._id || product.id;
   const url = shareUrl || generateShareUrl(productIdentifier);
   const text = `${product.name} - Rent for ₹${product.price} on Rent the Moment`;
-  
+
   return {
     whatsapp: `https://wa.me/?text=${encodeURIComponent(text + '\n\n' + url)}`,
     facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
