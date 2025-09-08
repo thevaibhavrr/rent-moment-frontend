@@ -120,20 +120,7 @@ export default function ProductPageClient({ product }: ProductPageClientProps) {
             >
               <ArrowLeft className="w-5 h-5" />
             </Link>
-            <div className="flex-1">
-              <div className="flex items-center space-x-2 text-sm text-gray-600">
-                <Link href="/" className="hover:text-gray-900">Home</Link>
-                <span>/</span>
-                <Link href="/categories" className="hover:text-gray-900">Categories</Link>
-                <span>/</span>
-                <Link href={`/categories/${product.category.slug}`} className="hover:text-gray-900">
-                  {product.category.name}
-                </Link>
-                <span>/</span>
-                <span className="text-gray-900">{product.name}</span>
-              </div>
             </div>
-          </div>
         </div>
       </div>
 

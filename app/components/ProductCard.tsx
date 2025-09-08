@@ -256,9 +256,7 @@ export default function ProductCard({ product, variant = 'default' }: ProductCar
                   </span>
                 )}
               </div>
-              <div className="flex items-center space-x-1 text-xs text-gray-500">
-                <span>{product.views} views</span>
-              </div>
+              
             </div>
 
             {/* Product Name */}

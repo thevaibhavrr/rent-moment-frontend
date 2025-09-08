@@ -127,9 +127,23 @@ function ProductsPageContent() {
     <motion.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="min-h-screen bg-gray-50 pt-10"
+      className="min-h-screen bg-gray-50 pt-5"
     >
-      {/* Search and Filters */}
+
+<div className="bg-white border-b border-gray-200">
+         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+           <div className="flex items-center space-x-4">
+             <Link
+               href={`/`}
+               className="p-2 text-gray-600 hover:text-gray-900 transition-colors"
+             >
+               <ArrowLeft className="w-5 h-5" />
+             </Link>
+             
+           </div>
+         </div>
+       </div>
+
     
 
       {/* Products Grid/List */}
@@ -198,7 +212,7 @@ function ProductsPageContent() {
                 className="text-center mt-16"
               >
                 <Link
-                  href={`/categories/${randomCategory.slug}`}
+                  href={`/products?category=${randomCategory.slug}`}
                   className="inline-flex items-center space-x-3 bg-black text-white px-5 py-4 rounded-lg hover:bg-gray-800 transition-all duration-200 font-semibold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                 >
                   <Sparkles className="w-5 h-5" />
