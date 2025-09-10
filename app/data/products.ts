@@ -1,5 +1,6 @@
 import { apiService } from '../services/api';
 import { Category, Product, PaginatedResponse } from '../types';
+import { cache, CACHE_KEYS } from '../utils/cache';
 
 // Get all categories
 export async function getCategories(): Promise<Category[]> {
@@ -93,4 +94,39 @@ export async function getProductById(id: string): Promise<Product> {
     console.error('Error fetching product by ID:', error);
     throw error;
   }
+}
+
+// Cache management utilities
+export function clearCache(): void {
+  cache.clear();
+  console.log('All cache cleared');
+}
+
+export function clearCategoriesCache(): void {
+  cache.delete(CACHE_KEYS.CATEGORIES);
+  console.log('Categories cache cleared');
+}
+
+export function clearProductsCache(): void {
+  // Clear all product-related caches
+  const keys = Object.keys(localStorage);
+  keys.forEach(key => {
+    if (key.includes('products') || key.includes('product_')) {
+      localStorage.removeItem(key);
+    }
+  });
+  console.log('Products cache cleared');
+}
+
+export function getCacheInfo(): { key: string; size: number; expiresAt: Date }[] {
+  return cache.getCacheInfo();
+}
+
+// Check if data is cached
+export function isCategoriesCached(): boolean {
+  return cache.has(CACHE_KEYS.CATEGORIES);
+}
+
+export function isProductCached(productId: string): boolean {
+  return cache.has(`product_${productId}`);
 } 

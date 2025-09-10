@@ -13,6 +13,7 @@ import {
   UpdateProfileData,
   ChangePasswordData
 } from '../types';
+import { cache, createCacheKey, CACHE_KEYS } from '../utils/cache';
 
 class ApiService {
   private api: AxiosInstance;
@@ -92,22 +93,82 @@ class ApiService {
 
   // Categories endpoints
   async getCategories(): Promise<Category[]> {
+    const cacheKey = CACHE_KEYS.CATEGORIES;
+    
+    // Try to get from cache first
+    const cachedData = cache.get<Category[]>(cacheKey);
+    if (cachedData) {
+      console.log('Categories loaded from cache');
+      return cachedData;
+    }
+
+    // Fetch from API if not in cache
     const response: AxiosResponse<ApiResponse<{ categories: Category[]; totalPages: number; currentPage: number; total: number }>> = await this.api.get('/categories');
-    return response.data.data!.categories || [];
+    const categories = response.data.data!.categories || [];
+    
+    // Cache the result
+    cache.set(cacheKey, categories);
+    console.log('Categories fetched from API and cached');
+    
+    return categories;
   }
 
   async getCategory(id: string): Promise<Category> {
+    const cacheKey = createCacheKey(CACHE_KEYS.CATEGORY_BY_SLUG, id);
+    
+    // Try to get from cache first
+    const cachedData = cache.get<Category>(cacheKey);
+    if (cachedData) {
+      console.log(`Category ${id} loaded from cache`);
+      return cachedData;
+    }
+
+    // Fetch from API if not in cache
     const response: AxiosResponse<ApiResponse<{ category: Category }>> = await this.api.get(`/categories/${id}`);
-    return response.data.data!.category;
+    const category = response.data.data!.category;
+    
+    // Cache the result
+    cache.set(cacheKey, category);
+    console.log(`Category ${id} fetched from API and cached`);
+    
+    return category;
   }
 
   async getCategoryBySlug(slug: string): Promise<Category> {
+    const cacheKey = createCacheKey(CACHE_KEYS.CATEGORY_BY_SLUG, slug);
+    
+    // Try to get from cache first
+    const cachedData = cache.get<Category>(cacheKey);
+    if (cachedData) {
+      console.log(`Category ${slug} loaded from cache`);
+      return cachedData;
+    }
+
+    // Fetch from API if not in cache
     const response: AxiosResponse<ApiResponse<{ category: Category }>> = await this.api.get(`/categories/slug/${slug}`);
-    return response.data.data!.category;
+    const category = response.data.data!.category;
+    
+    // Cache the result
+    cache.set(cacheKey, category);
+    console.log(`Category ${slug} fetched from API and cached`);
+    
+    return category;
   }
 
   // Products endpoints
   async getProducts(page = 1, limit = 12, filters?: Record<string, any>): Promise<PaginatedResponse<Product>> {
+    // Create cache key based on parameters
+    const filterString = filters ? JSON.stringify(filters) : 'no_filters';
+    const cacheKey = createCacheKey(CACHE_KEYS.PRODUCTS, page, limit, filterString);
+    
+    // Try to get from cache first
+    const cachedData = cache.get<PaginatedResponse<Product>>(cacheKey);
+    if (cachedData) {
+      console.log(`Products page ${page} loaded from cache`);
+      return cachedData;
+    }
+
+    // Fetch from API if not in cache
     const params = new URLSearchParams({
       page: page.toString(),
       limit: limit.toString(),
@@ -115,17 +176,39 @@ class ApiService {
     });
     const response: AxiosResponse<ApiResponse<{ products: Product[]; totalPages: number; currentPage: number; total: number }>> = await this.api.get(`/products?${params}`);
     const data = response.data.data!;
-    return {
+    const result = {
       products: data.products || [],
       totalPages: data.totalPages,
       currentPage: data.currentPage,
       total: data.total
     };
+    
+    // Cache the result
+    cache.set(cacheKey, result);
+    console.log(`Products page ${page} fetched from API and cached`);
+    
+    return result;
   }
 
   async getProduct(id: string): Promise<Product> {
+    const cacheKey = createCacheKey(CACHE_KEYS.PRODUCT_BY_ID, id);
+    
+    // Try to get from cache first
+    const cachedData = cache.get<Product>(cacheKey);
+    if (cachedData) {
+      console.log(`Product ${id} loaded from cache`);
+      return cachedData;
+    }
+
+    // Fetch from API if not in cache
     const response: AxiosResponse<ApiResponse<{ product: Product }>> = await this.api.get(`/products/${id}`);
-    return response.data.data!.product;
+    const product = response.data.data!.product;
+    
+    // Cache the result
+    cache.set(cacheKey, product);
+    console.log(`Product ${id} fetched from API and cached`);
+    
+    return product;
   }
 
   async getProductBySlug(slug: string): Promise<Product> {
@@ -134,18 +217,34 @@ class ApiService {
   }
 
   async getProductsByCategory(categoryId: string, page = 1, limit = 12): Promise<PaginatedResponse<Product>> {
+    const cacheKey = createCacheKey(CACHE_KEYS.PRODUCTS_BY_CATEGORY, categoryId, page, limit);
+    
+    // Try to get from cache first
+    const cachedData = cache.get<PaginatedResponse<Product>>(cacheKey);
+    if (cachedData) {
+      console.log(`Products for category ${categoryId} page ${page} loaded from cache`);
+      return cachedData;
+    }
+
+    // Fetch from API if not in cache
     const params = new URLSearchParams({
       page: page.toString(),
       limit: limit.toString()
     });
     const response: AxiosResponse<ApiResponse<{ products: Product[]; totalPages: number; currentPage: number; total: number }>> = await this.api.get(`/products/category/${categoryId}?${params}`);
     const data = response.data.data!;
-    return {
+    const result = {
       products: data.products || [],
       totalPages: data.totalPages,
       currentPage: data.currentPage,
       total: data.total
     };
+    
+    // Cache the result
+    cache.set(cacheKey, result);
+    console.log(`Products for category ${categoryId} page ${page} fetched from API and cached`);
+    
+    return result;
   }
 
   async searchProducts(query: string, page = 1, limit = 12): Promise<PaginatedResponse<Product>> {

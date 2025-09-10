@@ -7,6 +7,7 @@ import { CartProvider } from "./contexts/CartContext";
 import { Toaster } from "react-hot-toast";
 import { Inter } from 'next/font/google';
 import { Analytics } from "@vercel/analytics/next";
+import CacheDebugger from "./components/CacheDebugger";
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -83,6 +84,7 @@ export default function RootLayout({
               }}
             />
             <Analytics />
+            {process.env.NODE_ENV === 'development' && <CacheDebugger />}
           </CartProvider>
         </AuthProvider>
       </body>
