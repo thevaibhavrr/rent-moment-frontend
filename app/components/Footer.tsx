@@ -75,28 +75,23 @@ export default function Footer() {
             <h3 className="text-lg font-semibold">Categories</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/categories/lehengas" className="text-gray-300 hover:text-yellow-400 transition-colors text-sm">
+                <Link href="/products?category=6891ea9e4c1849c2df9e1226" className="text-gray-300 hover:text-yellow-400 transition-colors text-sm">
                   Lehengas
                 </Link>
               </li>
               <li>
-                <Link href="/categories/western-dresses" className="text-gray-300 hover:text-yellow-400 transition-colors text-sm">
-                  Western Dresses
+                <Link href="/products?category=6891ffbe56ab7a0c7cea74eb" className="text-gray-300 hover:text-yellow-400 transition-colors text-sm">
+                  Indo Western Dresses
                 </Link>
               </li>
               <li>
-                <Link href="/categories/traditional-dresses" className="text-gray-300 hover:text-yellow-400 transition-colors text-sm">
-                  Traditional Dresses
+                <Link href="/products?category=68a6cb43aacb7eda1c15d895" className="text-gray-300 hover:text-yellow-400 transition-colors text-sm">
+                  Rajputi Poshak
                 </Link>
               </li>
               <li>
-                <Link href="/categories/shoes" className="text-gray-300 hover:text-yellow-400 transition-colors text-sm">
-                  Shoes & Footwear
-                </Link>
-              </li>
-              <li>
-                <Link href="/categories/accessories" className="text-gray-300 hover:text-yellow-400 transition-colors text-sm">
-                  Accessories
+                <Link href="/products?category=68beefb77176654534ebf385" className="text-gray-300 hover:text-yellow-400 transition-colors text-sm">
+                  Sari
                 </Link>
               </li>
             </ul>

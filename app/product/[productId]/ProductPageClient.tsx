@@ -115,7 +115,7 @@ export default function ProductPageClient({ product }: ProductPageClientProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center space-x-4">
             <Link
-              href={`/categories/${product.category.slug}`}
+              href={`/products?category=${product.category._id}`}
               className="p-2 text-gray-600 hover:text-gray-900 transition-colors"
             >
               <ArrowLeft className="w-5 h-5" />
@@ -395,7 +395,7 @@ export default function ProductPageClient({ product }: ProductPageClientProps) {
                 
                 <div className="text-center mt-8">
                   <Link
-                    href={`/categories/${product.category.slug}`}
+                    href={`/products?category=${product.category._id}`}
                     className="inline-flex items-center px-6 py-3 bg-pink-500 text-white rounded-lg hover:bg-pink-600 transition-colors font-medium"
                   >
                     View All {product.category.name}
@@ -407,7 +407,7 @@ export default function ProductPageClient({ product }: ProductPageClientProps) {
               <div className="text-center py-8">
                 <p className="text-gray-500 mb-4">No related products found</p>
                 <Link
-                  href={`/categories/${product.category.slug}`}
+                  href={`/products?category=${product.category._id}`}
                   className="inline-flex items-center px-6 py-3 bg-pink-500 text-white rounded-lg hover:bg-pink-600 transition-colors font-medium"
                 >
                   Browse All {product.category.name}

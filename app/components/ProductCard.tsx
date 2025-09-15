@@ -266,7 +266,7 @@ export default function ProductCard({ product, variant = 'default' }: ProductCar
             {/* Product Details */}
             <div className="flex items-center justify-between mb-2">
               <div className="flex items-center space-x-2">
-                <span className="text-xs text-gray-600">Sizes: {product.sizes.map((s: { size: string }) => s.size).join(', ')}</span>
+                {/* <span className="text-xs text-gray-600">Sizes: {product.sizes.map((s: { size: string }) => s.size).join(', ')}</span> */}
                 <span className="text-xs text-gray-500">•</span>
                 <span className="text-xs text-gray-600">{product.color}</span>
               </div>

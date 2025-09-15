@@ -98,7 +98,7 @@ export default function CategoriesPage() {
             {filteredCategories.map((category) => (
               <Link
                 key={category._id}
-                href={`/categories/${category.slug}`}
+                href={`/products?category=${category._id}`}
                 className="group bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
               >
                 {/* Image Container */}

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, Suspense, useRef } from 'react';
+import { useState, useEffect, Suspense, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { Search, Filter, Grid, List, ArrowLeft } from 'lucide-react';
@@ -38,28 +38,13 @@ function ProductsPageContent() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
+  const [categoryFilter, setCategoryFilter] = useState<string>('');
   const [sortBy, setSortBy] = useState('createdAt');
   const [sortOrder, setSortOrder] = useState('desc');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [randomCategory, setRandomCategory] = useState<Category | null>(null);
 
-  // Handle URL parameter changes
-  useEffect(() => {
-    const categoryFromUrl = searchParams.get('category');
-    if (categoryFromUrl && categories.length > 0) {
-      const category = categories.find(cat => cat.slug === categoryFromUrl);
-      if (category) {
-        // Set the category filter for search
-        setSearchTerm(category.name);
-      }
-    }
-  }, [searchParams, categories]);
-
-  useEffect(() => {
-    loadData();
-  }, [searchTerm, sortBy, sortOrder]);
-
-  const loadData = async () => {
+  const loadData = useCallback(async () => {
     try {
       setLoading(true);
       
@@ -74,11 +59,19 @@ function ProductsPageContent() {
       }
       
       // Load products with current filters - show 50 products
-      const productsData = await getProducts(1, 50, {
-        search: searchTerm,
+      const filters: any = {
         sort: sortBy,
         order: sortOrder
-      });
+      };
+      
+      // Add search or category filter (not both)
+      if (categoryFilter) {
+        filters.category = categoryFilter;
+      } else if (searchTerm) {
+        filters.search = searchTerm;
+      }
+      
+      const productsData = await getProducts(1, 50, filters);
       
       // Shuffle products for random order
       const shuffledProducts = [...(productsData.products || [])].sort(() => Math.random() - 0.5);
@@ -88,7 +81,22 @@ function ProductsPageContent() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [searchTerm, categoryFilter, sortBy, sortOrder]);
+
+  // Handle URL parameter changes
+  useEffect(() => {
+    const categoryFromUrl = searchParams.get('category');
+    if (categoryFromUrl) {
+      setCategoryFilter(categoryFromUrl);
+      setSearchTerm('');
+    } else {
+      setCategoryFilter('');
+    }
+  }, [searchParams]);
+
+  useEffect(() => {
+    loadData();
+  }, [loadData]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -100,6 +108,7 @@ function ProductsPageContent() {
 
   const clearFilters = () => {
     setSearchTerm('');
+    setCategoryFilter('');
     setSortBy('createdAt');
     setSortOrder('desc');
   };
@@ -212,7 +221,7 @@ function ProductsPageContent() {
                 className="text-center mt-16"
               >
                 <Link
-                  href={`/products?category=${randomCategory.slug}`}
+                  href={`/products?category=${randomCategory._id}`}
                   className="inline-flex items-center space-x-3 bg-black text-white px-5 py-4 rounded-lg hover:bg-gray-800 transition-all duration-200 font-semibold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                 >
                   <Sparkles className="w-5 h-5" />

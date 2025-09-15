@@ -231,7 +231,7 @@ export default async function SharePage({ params }: SharePageProps) {
                   <span>/</span>
                   <Link href="/categories" className="hover:text-gray-900">Categories</Link>
                   <span>/</span>
-                  <Link href={`/categories/${product.category.slug}`} className="hover:text-gray-900">
+                  <Link href={`/products?category=${product.category._id}`} className="hover:text-gray-900">
                     {product.category.name}
                   </Link>
                   <span>/</span>
