@@ -1,0 +1,187 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Luxury Clothing Rental Design System - All colors MUST be HSL */
+
+@layer base {
+  :root {
+    /* Luxury Color Palette */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 9%;
+    
+    /* Luxury Gold Accents */
+    --gold: 45 100% 50%;
+    --gold-light: 45 100% 65%;
+    --gold-dark: 45 100% 35%;
+    --gold-muted: 45 30% 85%;
+    
+    /* Premium Grays */
+    --gray-50: 0 0% 98%;
+    --gray-100: 0 0% 96%;
+    --gray-200: 0 0% 90%;
+    --gray-300: 0 0% 83%;
+    --gray-400: 0 0% 64%;
+    --gray-500: 0 0% 45%;
+    --gray-600: 0 0% 32%;
+    --gray-700: 0 0% 25%;
+    --gray-800: 0 0% 15%;
+    --gray-900: 0 0% 9%;
+
+    /* Component Colors */
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 9%;
+    
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 9%;
+    
+    --luxury: 45 100% 50%;
+    --luxury-foreground: 0 0% 9%;
+    
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+    
+    --accent: 45 100% 50%;
+    --accent-foreground: 0 0% 9%;
+    
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 45 100% 50%;
+    
+    /* Luxury Gradients */
+    --gradient-gold: linear-gradient(135deg, hsl(var(--gold)) 0%, hsl(var(--gold-light)) 100%);
+    --gradient-luxury: linear-gradient(135deg, hsl(var(--gray-900)) 0%, hsl(var(--gray-700)) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(var(--gray-50)) 100%);
+    
+    /* Luxury Shadows */
+    --shadow-luxury: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
+    --shadow-gold: 0 10px 40px -10px hsla(var(--gold), 0.3);
+    --shadow-card: 0 4px 20px -4px rgba(0, 0, 0, 0.06);
+    
+    /* Border Radius */
+    --radius: 0.75rem;
+    --radius-sm: 0.5rem;
+    --radius-lg: 1rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 0 0% 9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 15%;
+    --card-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 64%;
+    --accent: 45 100% 50%;
+    --accent-foreground: 0 0% 9%;
+    --border: 0 0% 25%;
+    --input: 0 0% 25%;
+    --ring: 45 100% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-inter antialiased;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-playfair;
+  }
+}
+
+@layer components {
+  /* Luxury Button Variants */
+  .btn-luxury {
+    @apply relative overflow-hidden bg-gradient-to-r from-gold to-gold-light text-gray-900 font-medium px-8 py-3 rounded-lg transition-all duration-300 hover:shadow-gold hover:scale-105;
+  }
+  
+  .btn-luxury-outline {
+    @apply border-2 border-gold text-gold bg-transparent font-medium px-8 py-3 rounded-lg transition-all duration-300 hover:bg-gold hover:text-gray-900 hover:shadow-gold;
+  }
+  
+  /* Product Card Animations */
+  .product-card {
+    @apply relative bg-card rounded-lg overflow-hidden transition-all duration-300 hover:shadow-luxury hover:-translate-y-1;
+  }
+  
+  .product-card-image {
+    @apply aspect-[3/4] w-full object-cover transition-transform duration-500 group-hover:scale-105;
+  }
+  
+  /* Category Navigation */
+  .category-nav {
+    @apply relative text-gray-600 font-medium py-3 px-4 transition-all duration-300 hover:text-gold;
+  }
+  
+  .category-nav::after {
+    @apply content-[''] absolute bottom-0 left-0 w-full h-0.5 bg-gold scale-x-0 transition-transform duration-300 origin-center;
+  }
+  
+  .category-nav:hover::after,
+  .category-nav.active::after {
+    @apply scale-x-100;
+  }
+  
+  /* Search Input */
+  .search-input {
+    @apply w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg transition-all duration-300 focus:border-gold focus:ring-2 focus:ring-gold/20 focus:bg-white;
+  }
+  
+  /* Luxury Container */
+  .luxury-container {
+    @apply container mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  /* Utility Classes */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .line-clamp-1 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+  }
+  
+  .line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+}
