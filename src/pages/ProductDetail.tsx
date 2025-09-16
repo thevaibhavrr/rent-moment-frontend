@@ -165,11 +165,11 @@ const ProductDetail = () => {
                 </span>
               </div>
                 {/* deposit */}
-                {product.deposit && product.deposit > 0 && (
+                {/* {product.deposit && product.deposit > 0 && (
                   <div className="text-sm text-gray-500">
                     Deposit: ₹{product.deposit.toLocaleString()}
                   </div>
-                )}
+                )} */}
             </div>
 
 
@@ -224,24 +224,7 @@ const ProductDetail = () => {
               </button>
             </div>
 
-            {/* Features */}
-            <div className="grid grid-cols-3 gap-4 pt-6 border-t border-gray-200">
-              <div className="text-center">
-                <Truck className="w-6 h-6 text-gold mx-auto mb-2" />
-                <div className="text-sm font-medium text-gray-900">Free Delivery</div>
-                <div className="text-xs text-gray-500">2-3 days</div>
-              </div>
-              <div className="text-center">
-                <Shield className="w-6 h-6 text-gold mx-auto mb-2" />
-                <div className="text-sm font-medium text-gray-900">Damage Protection</div>
-                <div className="text-xs text-gray-500">Included</div>
-              </div>
-              <div className="text-center">
-                <RotateCcw className="w-6 h-6 text-gold mx-auto mb-2" />
-                <div className="text-sm font-medium text-gray-900">Easy Returns</div>
-                <div className="text-xs text-gray-500">Hassle-free</div>
-              </div>
-            </div>
+            
           </div>
         </div>
       </div>

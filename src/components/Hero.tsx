@@ -1,6 +1,16 @@
 import heroImage from "@/assets/hero-banner.jpg";
 
 const Hero = () => {
+  const scrollToProducts = () => {
+    const productSection = document.querySelector('[data-section="products"]');
+    if (productSection) {
+      productSection.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
+
   return (
     <section className="relative h-[60vh] md:h-[70vh] lg:h-[80vh] overflow-hidden">
       <div className="absolute inset-0">
@@ -24,7 +34,10 @@ const Hero = () => {
             Premium designer pieces at your fingertips.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <button className="btn-luxury text-lg px-10 py-4">
+            <button 
+              onClick={scrollToProducts}
+              className="btn-luxury text-lg px-10 py-4"
+            >
               Shop Collection
             </button>
           </div>

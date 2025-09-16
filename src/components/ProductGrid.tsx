@@ -88,7 +88,7 @@ const ProductGrid = ({ category = "All" }: ProductGridProps) => {
   // Show initial loading state (only when no products are loaded yet)
   if (isLoading && products.length === 0) {
     return (
-      <section className="py-12 bg-gray-50">
+      <section className="py-12 bg-gray-50" data-section="products">
         <div className="luxury-container">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-playfair font-bold text-gray-900 mb-4">
@@ -145,20 +145,14 @@ const ProductGrid = ({ category = "All" }: ProductGridProps) => {
   }
 
   return (
-    <section className="py-12 bg-gray-50">
+    <section className="pb-12 pt-5 bg-gray-50" data-section="products">
       <div className="luxury-container">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-playfair font-bold text-gray-900 mb-4">
             {category === "All" ? "Featured Collection" : category}
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Discover our curated selection of premium designer pieces for rent
-          </p>
-          {productsData && (
-            <p className="text-sm text-gray-500 mt-2">
-              Showing {products.length} products
-            </p>
-          )}
+          
+          
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-6 lg:gap-8">

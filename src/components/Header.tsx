@@ -19,15 +19,15 @@ const Header = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200">
+    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b  border-gray-200">
       <div className="luxury-container">
-        <div className="flex items-center justify-between h-16 md:h-20">
+        <div className="flex items-center justify-between h-20 md:h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3">
             <img 
               src="/logo.png" 
               alt="Rent the Moment" 
-              className="h-12 md:h-10 w-auto"
+              className="h-14 md:h-10 w-auto"
             />
           </Link>
 
@@ -50,13 +50,13 @@ const Header = () => {
             {/* Mobile Search Icon */}
             <button
               onClick={handleSearchClick}
-              className="md:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors"
+              className="md:hidden p-3 hover:bg-gray-100 rounded-lg transition-colors"
             >
-              <Search className="w-6 h-6 text-gray-600" />
+              <Search className="w-7 h-7 text-gray-600" />
             </button>
             {/* Wishlist */}
-            <Link to="/wishlist" className="relative p-2 hover:bg-gray-100 rounded-lg transition-colors">
-              <Heart className="w-6 h-6 text-gray-600" />
+            <Link to="/wishlist" className="relative p-3 hover:bg-gray-100 rounded-lg transition-colors">
+              <Heart className="w-7 h-7 text-gray-600" />
               {wishlistCount > 0 && (
                 <span className="absolute -top-1 -right-1 bg-gold text-gray-900 text-xs font-medium rounded-full w-5 h-5 flex items-center justify-center">
                   {wishlistCount}
