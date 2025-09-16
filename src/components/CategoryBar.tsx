@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useAllCategories } from "@/hooks/useCategories";
 import { Category } from "@/services/api";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Spinner } from "@/components/ui/spinner";
 
 interface CategoryBarProps {
   activeCategory?: string;
@@ -25,11 +27,15 @@ const CategoryBar = ({ activeCategory = "All", onCategoryChange }: CategoryBarPr
     return (
       <div className="bg-white border-b border-gray-100">
         <div className="luxury-container">
+          <div className="flex items-center justify-center py-4 space-x-3">
+            <Spinner size="sm" />
+            <span className="text-sm text-gray-500">Loading categories...</span>
+          </div>
           <div className="flex overflow-x-auto scrollbar-hide py-4 space-x-1">
             {[...Array(7)].map((_, index) => (
-              <div
+              <Skeleton
                 key={index}
-                className="category-nav whitespace-nowrap animate-pulse bg-gray-200 h-10 w-20 rounded"
+                className="h-10 w-20 rounded"
               />
             ))}
           </div>

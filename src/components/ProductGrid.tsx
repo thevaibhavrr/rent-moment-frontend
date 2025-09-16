@@ -3,6 +3,8 @@ import ProductCard from "./ProductCard";
 import Pagination from "./Pagination";
 import { useProducts } from "@/hooks/useProducts";
 import { Product } from "@/services/api";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Spinner } from "@/components/ui/spinner";
 
 interface ProductGridProps {
   category?: string;
@@ -46,17 +48,23 @@ const ProductGrid = ({ category = "All" }: ProductGridProps) => {
             <p className="text-gray-600 max-w-2xl mx-auto">
               Discover our curated selection of premium designer pieces for rent
             </p>
+            
+            {/* Loading spinner for category changes */}
+            <div className="flex items-center justify-center space-x-3 mt-6">
+              <Spinner size="md" />
+              <span className="text-sm text-gray-500">Loading products...</span>
+            </div>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
             {[...Array(8)].map((_, index) => (
-              <div key={index} className="product-card animate-pulse">
-                <div className="bg-gray-200 h-64 rounded-t-lg"></div>
+              <div key={index} className="product-card">
+                <Skeleton className="h-64 w-full rounded-t-lg" />
                 <div className="p-4 space-y-3">
-                  <div className="h-4 bg-gray-200 rounded w-3/4"></div>
-                  <div className="h-3 bg-gray-200 rounded w-full"></div>
-                  <div className="h-3 bg-gray-200 rounded w-2/3"></div>
-                  <div className="h-8 bg-gray-200 rounded"></div>
+                  <Skeleton className="h-4 w-3/4" />
+                  <Skeleton className="h-3 w-full" />
+                  <Skeleton className="h-3 w-2/3" />
+                  <Skeleton className="h-8 w-full" />
                 </div>
               </div>
             ))}
