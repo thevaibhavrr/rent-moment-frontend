@@ -1,6 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import ProductCard from "./ProductCard";
-import Pagination from "./Pagination";
 import { useProducts } from "@/hooks/useProducts";
 import { Product } from "@/services/api";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -11,7 +10,12 @@ interface ProductGridProps {
 }
 
 const ProductGrid = ({ category = "All" }: ProductGridProps) => {
+  const [allProducts, setAllProducts] = useState<Product[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
+  const observerRef = useRef<IntersectionObserver | null>(null);
+  const loadMoreRef = useRef<HTMLDivElement | null>(null);
   
   // Use the API hook to fetch products with pagination
   const { data: productsData, isLoading, error } = useProducts({
@@ -22,22 +26,67 @@ const ProductGrid = ({ category = "All" }: ProductGridProps) => {
     order: 'desc'
   });
 
-  // Reset page when category changes
+  // Reset state when category changes
   useEffect(() => {
+    setAllProducts([]);
     setCurrentPage(1);
+    setHasMore(true);
+    setIsLoadingMore(false);
   }, [category]);
 
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-    // Scroll to top when page changes
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  // Update products when new data arrives
+  useEffect(() => {
+    if (productsData) {
+      if (currentPage === 1) {
+        // First page - replace all products
+        setAllProducts(productsData.products);
+      } else {
+        // Subsequent pages - append products
+        setAllProducts(prev => [...prev, ...productsData.products]);
+      }
+      setHasMore(productsData.hasNextPage);
+      setIsLoadingMore(false);
+    }
+  }, [productsData, currentPage]);
 
+  // Load more products
+  const loadMore = useCallback(() => {
+    if (!isLoadingMore && hasMore && !isLoading) {
+      setIsLoadingMore(true);
+      setCurrentPage(prev => prev + 1);
+    }
+  }, [isLoadingMore, hasMore, isLoading]);
 
-  const products = productsData?.products || [];
+  // Set up intersection observer for infinite scroll
+  useEffect(() => {
+    if (observerRef.current) {
+      observerRef.current.disconnect();
+    }
 
-  // Show loading state
-  if (isLoading) {
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && hasMore && !isLoadingMore) {
+          loadMore();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (loadMoreRef.current) {
+      observerRef.current.observe(loadMoreRef.current);
+    }
+
+    return () => {
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+      }
+    };
+  }, [loadMore, hasMore, isLoadingMore]);
+
+  const products = allProducts;
+
+  // Show initial loading state (only when no products are loaded yet)
+  if (isLoading && products.length === 0) {
     return (
       <section className="py-12 bg-gray-50">
         <div className="luxury-container">
@@ -107,7 +156,7 @@ const ProductGrid = ({ category = "All" }: ProductGridProps) => {
           </p>
           {productsData && (
             <p className="text-sm text-gray-500 mt-2">
-              Showing {products.length} of {productsData.total} products
+              Showing {products.length} products
             </p>
           )}
         </div>
@@ -121,7 +170,7 @@ const ProductGrid = ({ category = "All" }: ProductGridProps) => {
           ))}
         </div>
 
-        {products.length === 0 && (
+        {products.length === 0 && !isLoading && (
           <div className="text-center py-12">
             <p className="text-gray-500 text-lg">
               No products found in this category
@@ -129,15 +178,29 @@ const ProductGrid = ({ category = "All" }: ProductGridProps) => {
           </div>
         )}
 
-        {/* Pagination */}
-        {productsData && productsData.totalPages > 1 && (
-          <Pagination
-            currentPage={productsData.currentPage}
-            totalPages={productsData.totalPages}
-            onPageChange={handlePageChange}
-            hasNextPage={productsData.hasNextPage}
-            hasPrevPage={productsData.hasPrevPage}
-          />
+        {/* Infinite scroll trigger */}
+        {hasMore && (
+          <div ref={loadMoreRef} className="flex justify-center py-8">
+            {isLoadingMore ? (
+              <div className="flex items-center space-x-3">
+                <Spinner size="md" />
+                <span className="text-sm text-gray-500">Loading more products...</span>
+              </div>
+            ) : (
+              <div className="text-sm text-gray-400">
+                Scroll down to load more products
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* End of results message */}
+        {!hasMore && products.length > 0 && (
+          <div className="text-center py-8">
+            <p className="text-sm text-gray-400">
+              You've reached the end of the collection
+            </p>
+          </div>
         )}
       </div>
     </section>

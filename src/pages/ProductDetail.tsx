@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, Heart, Star, Truck, Shield, RotateCcw } from "lucide-react";
 import { useProduct } from "@/hooks/useProducts";
@@ -14,6 +14,11 @@ const ProductDetail = () => {
   const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
   
   const isWishlisted = product ? isInWishlist(product._id) : false;
+
+  // Scroll to top when component mounts or product changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [id, product]);
 
   if (isLoading) {
     return (

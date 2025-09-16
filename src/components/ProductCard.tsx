@@ -88,12 +88,11 @@ const ProductCard = ({
                 ₹{price}
               </span>
             </div>
-            {/* deposit */}
-            {deposit && deposit > 0 && (
+            {/* {deposit && deposit > 0 && (
               <p className="text-xs text-gray-400">
                 Deposit: ₹{deposit.toLocaleString()}
               </p>
-            )}
+            )} */}
             
           </div>
         </div>
