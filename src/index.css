@@ -139,7 +139,7 @@
   
   /* Category Navigation */
   .category-nav {
-    @apply relative text-gray-600 font-medium py-3 px-4 transition-all duration-300 hover:text-gold;
+    @apply relative text-gray-600 font-medium py-3 px-2 transition-all duration-300 hover:text-gold;
   }
   
   .category-nav::after {
