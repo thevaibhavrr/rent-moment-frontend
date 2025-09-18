@@ -9,21 +9,20 @@ const Footer = () => {
           {/* Brand */}
           <div className="space-y-4">
             <div className="text-2xl font-playfair font-bold">
-              LuxeRent
+              Rent the Magic
             </div>
             <p className="text-gray-300 text-sm leading-relaxed">
               Premium clothing rental for special occasions. 
               Rent the Magic, own the moment.
             </p>
+            <div className="space-y-2">
+              <p className="text-gray-300 text-sm">
+                📞 Contact: <a href="tel:7909921367" className="text-gold hover:text-white transition-colors">7909921367</a>
+              </p>
+            </div>
             <div className="flex space-x-4">
-              <a href="#" className="p-2 bg-gray-800 rounded-lg hover:bg-gold hover:text-gray-900 transition-colors">
+              <a href="https://www.instagram.com/rent_the_magic?igsh=MTd5M3gwaHd0b2gzOQ==" target="_blank" rel="noopener noreferrer" className="p-2 bg-gray-800 rounded-lg hover:bg-gold hover:text-gray-900 transition-colors">
                 <Instagram className="w-5 h-5" />
-              </a>
-              <a href="#" className="p-2 bg-gray-800 rounded-lg hover:bg-gold hover:text-gray-900 transition-colors">
-                <Facebook className="w-5 h-5" />
-              </a>
-              <a href="#" className="p-2 bg-gray-800 rounded-lg hover:bg-gold hover:text-gray-900 transition-colors">
-                <Twitter className="w-5 h-5" />
               </a>
             </div>
           </div>
@@ -89,7 +88,7 @@ const Footer = () => {
         <div className="border-t border-gold/20 mt-8 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-gray-400 text-sm">
-              © 2024 LuxeRent. All rights reserved.
+              © 2025 Rent the Magic have all rights
             </p>
             <p className="text-gray-400 text-sm">
               Made with ❤️ for fashion lovers
