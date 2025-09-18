@@ -1,5 +1,5 @@
 // const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://cloth-backend-tpce.onrender.com/api';
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://rent-moment-backend.onrender.com';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://rent-moment-backend.onrender.com/api';
 
 
 export interface Product {
