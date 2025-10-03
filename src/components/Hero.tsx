@@ -25,7 +25,7 @@ const Hero = () => {
       <div className="relative z-10 flex items-center justify-center h-full">
         <div className="text-center text-white max-w-4xl mx-auto px-4">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-playfair font-bold mb-6 leading-tight">
-            Rent the Magic.
+            Rent the Moment.
             <br />
             <span className="text-gold">Own the Moment.</span>
           </h1>
