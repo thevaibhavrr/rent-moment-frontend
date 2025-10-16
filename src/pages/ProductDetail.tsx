@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, Heart, Star, Truck, Shield, RotateCcw } from "lucide-react";
-import { useProduct } from "@/hooks/useProducts";
+import { useProduct, useProductsByCategory } from "@/hooks/useProducts";
 import { useWishlist } from "@/contexts/WishlistContext";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
+import ProductCard from "@/components/ProductCard";
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -14,6 +15,18 @@ const ProductDetail = () => {
   const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
   
   const isWishlisted = product ? isInWishlist(product._id) : false;
+
+  // Fetch related products from the same category
+  const categoryId = product?.categories?.[0]?._id;
+  const { data: relatedProductsData, isLoading: isLoadingRelated } = useProductsByCategory(
+    categoryId || "",
+    { limit: 8 }
+  );
+
+  // Filter out the current product from related products
+  const relatedProducts = relatedProductsData?.products?.filter(
+    (relatedProduct) => relatedProduct._id !== product?._id
+  ) || [];
 
   // Scroll to top when component mounts or product changes
   useEffect(() => {
@@ -227,6 +240,55 @@ const ProductDetail = () => {
             
           </div>
         </div>
+
+        {/* More Products Section */}
+        {relatedProducts.length > 0 && (
+          <div className="mt-16 pt-8 border-t border-gray-200">
+            <div className="text-center mb-8">
+              <h2 className="text-2xl md:text-3xl font-playfair font-bold text-gray-900 mb-2">
+                More from {product.categories?.[0]?.name || 'This Category'}
+              </h2>
+              <p className="text-gray-600">
+                Discover more beautiful pieces in the same style
+              </p>
+            </div>
+
+            {isLoadingRelated ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {[...Array(4)].map((_, index) => (
+                  <div key={index} className="space-y-4">
+                    <div className="aspect-[3/4] rounded-lg bg-gray-200 animate-pulse"></div>
+                    <div className="space-y-2">
+                      <div className="h-4 bg-gray-200 rounded animate-pulse"></div>
+                      <div className="h-4 bg-gray-200 rounded w-3/4 animate-pulse"></div>
+                      <div className="h-6 bg-gray-200 rounded w-1/2 animate-pulse"></div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {relatedProducts.slice(0, 4).map((relatedProduct) => (
+                  <ProductCard
+                    key={relatedProduct._id}
+                    product={relatedProduct}
+                  />
+                ))}
+              </div>
+            )}
+
+            {relatedProducts.length > 4 && (
+              <div className="text-center mt-8">
+                <Link
+                  to={`/?category=${product.categories?.[0]?._id}`}
+                  className="btn-luxury-outline"
+                >
+                  View All {product.categories?.[0]?.name || 'Products'}
+                </Link>
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

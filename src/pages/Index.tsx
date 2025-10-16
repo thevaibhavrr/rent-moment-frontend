@@ -15,7 +15,7 @@ const Index = () => {
   const [activeCategory, setActiveCategory] = useState("All");
 
   // Fetch categories and initial products to determine loading state
-  const { isLoading: categoriesLoading } = useAllCategories();
+  const { data: categoriesData, isLoading: categoriesLoading } = useAllCategories();
   const { isLoading: productsLoading } = useProducts({
     category: activeCategory === "All" ? undefined : activeCategory,
     page: 1,
@@ -25,11 +25,24 @@ const Index = () => {
   });
 
   useEffect(() => {
-    const category = searchParams.get("category");
-    if (category) {
-      setActiveCategory(category);
+    const categoryParam = searchParams.get("category");
+    if (categoryParam && categoriesData?.categories) {
+      // Check if the parameter is a category ID or slug
+      const category = categoriesData.categories.find(
+        (cat) => cat._id === categoryParam || cat.slug === categoryParam
+      );
+      
+      if (category) {
+        // Use the slug for the active category (as expected by CategoryBar)
+        setActiveCategory(category.slug);
+      } else {
+        // If not found, default to "All"
+        setActiveCategory("All");
+      }
+    } else if (!categoryParam) {
+      setActiveCategory("All");
     }
-  }, [searchParams]);
+  }, [searchParams, categoriesData]);
 
   // Show initial loading state when both categories and products are loading
   const isInitialLoading = categoriesLoading && productsLoading;
