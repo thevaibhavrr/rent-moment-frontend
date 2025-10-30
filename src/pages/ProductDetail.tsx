@@ -176,6 +176,16 @@ const ProductDetail = () => {
                 <span className="text-3xl font-bold text-gray-900">
                   ₹{product.price}
                 </span>
+                {product.originalPrice && product.originalPrice > 0 && product.originalPrice > product.price ? (
+                  <>
+                    <span className="text-xl text-gray-500 line-through">
+                      ₹{product.originalPrice}
+                    </span>
+                    <span className="text-sm font-semibold text-red-600 bg-red-100 px-3 py-1 rounded">
+                      {Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}% OFF
+                    </span>
+                  </>
+                ) : null}
               </div>
                 {/* deposit */}
                 {/* {product.deposit && product.deposit > 0 && (

@@ -184,4 +184,46 @@
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
   }
+
+  /* 3D Carousel Styles */
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  
+  .transform-style-preserve-3d {
+    transform-style: preserve-3d;
+  }
+  
+  /* 3D Carousel Animations */
+  .carousel-3d-item {
+    @apply transition-all duration-1000 ease-in-out;
+  }
+  
+  /* Floating Animation */
+  .float-animation {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+  
+  /* Glow Effect */
+  .glow-gold {
+    box-shadow: 0 0 20px hsla(var(--gold), 0.5);
+  }
+  
+  /* 3D Hover Effects */
+  .hover-3d {
+    @apply transition-transform duration-300;
+  }
+  
+  .hover-3d:hover {
+    transform: translateZ(20px) rotateX(5deg) rotateY(5deg);
+  }
 }

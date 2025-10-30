@@ -87,6 +87,16 @@ const ProductCard = ({
               <span className="text-2xl font-bold text-gray-900">
                 ₹{price}
               </span>
+              {originalPrice && originalPrice > 0 && originalPrice > price ? (
+                <>
+                  <span className="text-lg text-gray-500 line-through">
+                    ₹{originalPrice}
+                  </span>
+                  <span className="text-sm font-semibold text-red-600 bg-red-100 px-2 py-1 rounded">
+                    {Math.round(((originalPrice - price) / originalPrice) * 100)}% OFF
+                  </span>
+                </>
+              ) : null}
             </div>
             {/* {deposit && deposit > 0 && (
               <p className="text-xs text-gray-400">

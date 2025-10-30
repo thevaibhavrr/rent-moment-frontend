@@ -25,6 +25,8 @@ export interface Product {
   tags: string[];
   careInstructions?: string;
   isFeatured: boolean;
+  isHighlighted: boolean;
+  highlightOrder: number;
   isAvailable: boolean;
   views: number;
   slug: string;
@@ -152,6 +154,36 @@ class ApiService {
 
   async getProductBySlug(slug: string): Promise<ApiResponse<{ product: Product }>> {
     return this.request<{ product: Product }>(`/products/slug/${slug}`);
+  }
+
+  async getFeaturedProducts(limit?: number): Promise<ApiResponse<{ products: Product[] }>> {
+    const params = limit ? `?limit=${limit}` : '';
+    return this.request<{ products: Product[] }>(`/products/featured${params}`);
+  }
+
+  async getHighlightedProducts(limit?: number): Promise<ApiResponse<{ products: Product[] }>> {
+    const params = limit ? `?limit=${limit}` : '';
+    return this.request<{ products: Product[] }>(`/products/highlighted${params}`);
+  }
+
+  // Highlighted Products Management
+  async highlightProduct(productId: string): Promise<ApiResponse<{ product: Product }>> {
+    return this.request<{ product: Product }>(`/products/highlight/${productId}`, {
+      method: 'POST'
+    });
+  }
+
+  async unhighlightProduct(productId: string): Promise<ApiResponse<{ message: string }>> {
+    return this.request<{ message: string }>(`/products/highlight/${productId}`, {
+      method: 'DELETE'
+    });
+  }
+
+  async updateHighlightOrder(products: Array<{ id: string; order: number }>): Promise<ApiResponse<{ message: string }>> {
+    return this.request<{ message: string }>('/products/highlight/order', {
+      method: 'PUT',
+      body: JSON.stringify({ products })
+    });
   }
 
   async getProductsByCategory(
