@@ -5,6 +5,7 @@ import Hero from "@/components/Hero";
 import CategoryBar from "@/components/CategoryBar";
 import ProductGrid from "@/components/ProductGrid";
 import Footer from "@/components/Footer";
+import BottomActionBar from "@/components/BottomActionBar";
 import { useAllCategories } from "@/hooks/useCategories";
 import { useProducts } from "@/hooks/useProducts";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -49,7 +50,7 @@ const Index = () => {
 
   if (isInitialLoading) {
     return (
-      <div className="min-h-screen">
+      <div className="min-h-screen pb-28">{/* pad for fixed bottom bar */}
         <Header />
         <Hero />
         
@@ -101,21 +102,28 @@ const Index = () => {
           </div>
         </section>
 
+        {/* show the bottom action bar even during initial loading */}
+        <BottomActionBar />
+
         <Footer />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen pb-28">{/* pad for fixed bottom bar */}
       <Header />
       <Hero />
       <CategoryBar 
         activeCategory={activeCategory}
         onCategoryChange={setActiveCategory}
       />
-      <ProductGrid category={activeCategory} />
-      <Footer />
+  <ProductGrid category={activeCategory} />
+
+  {/* Small action bar right before the footer on the homepage */}
+  <BottomActionBar />
+
+  <Footer />
     </div>
   );
 };

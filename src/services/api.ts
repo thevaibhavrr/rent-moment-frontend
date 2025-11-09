@@ -1,5 +1,4 @@
-// const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://cloth-backend-tpce.onrender.com/api';
-// const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://rent-moment-backend.onrender.com/api';
+// const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 const API_BASE_URL = 'https://rent-moment-backend-971455500628.asia-south1.run.app/api';
 
 
@@ -58,6 +57,116 @@ export interface Category {
   slug: string;
   sortOrder: number;
   isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface Supercategory {
+  _id: string;
+  name: string;
+  description?: string;
+  image: string;
+  slug: string;
+  isActive: boolean;
+  sortOrder: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface BeautyCategory {
+  _id: string;
+  name: string;
+  description?: string;
+  image: string;
+  supercategory: string | Supercategory;
+  slug: string;
+  isActive: boolean;
+  sortOrder: number;
+  products: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface RoutineCategory {
+  _id: string;
+  name: string;
+  description?: string;
+  image: string;
+  slug: string;
+  isActive: boolean;
+  sortOrder: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface WinterCategory {
+  _id: string;
+  name: string;
+  description?: string;
+  image: string;
+  slug: string;
+  isActive: boolean;
+  sortOrder: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface SummerCategory {
+  _id: string;
+  name: string;
+  description?: string;
+  image: string;
+  slug: string;
+  isActive: boolean;
+  sortOrder: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ClothCategory {
+  _id: string;
+  name: string;
+  description?: string;
+  image: string;
+  slug: string;
+  isActive: boolean;
+  sortOrder: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface WomanCareCategory {
+  _id: string;
+  name: string;
+  description?: string;
+  image: string;
+  slug: string;
+  isActive: boolean;
+  sortOrder: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface KidsCategory {
+  _id: string;
+  name: string;
+  description?: string;
+  image: string;
+  slug: string;
+  isActive: boolean;
+  sortOrder: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface PerfumeCategory {
+  _id: string;
+  name: string;
+  description?: string;
+  image: string;
+  slug: string;
+  isActive: boolean;
+  sortOrder: number;
   createdAt: string;
   updatedAt: string;
 }
@@ -236,6 +345,214 @@ class ApiService {
 
   async getCategoryBySlug(slug: string): Promise<ApiResponse<{ category: Category }>> {
     return this.request<{ category: Category }>(`/categories/slug/${slug}`);
+  }
+
+  // Supercategories API (Beauty Section)
+  async getSupercategories(params: {
+    page?: number;
+    limit?: number;
+    sort?: string;
+    order?: 'asc' | 'desc';
+  } = {}): Promise<ApiResponse<{ supercategories: Supercategory[]; totalPages: number; currentPage: number; total: number }>> {
+    const searchParams = new URLSearchParams();
+    
+    Object.entries(params).forEach(([key, value]) => {
+      if (value !== undefined && value !== null) {
+        searchParams.append(key, value.toString());
+      }
+    });
+
+    const queryString = searchParams.toString();
+    const endpoint = `/supercategories${queryString ? `?${queryString}` : ''}`;
+    
+    return this.request<{ supercategories: Supercategory[]; totalPages: number; currentPage: number; total: number }>(endpoint);
+  }
+
+  async getSupercategoryById(id: string): Promise<ApiResponse<{ supercategory: Supercategory }>> {
+    return this.request<{ supercategory: Supercategory }>(`/supercategories/${id}`);
+  }
+
+  // Beauty Categories API
+  async getBeautyCategories(params: {
+    page?: number;
+    limit?: number;
+    sort?: string;
+    order?: 'asc' | 'desc';
+    supercategory?: string;
+  } = {}): Promise<ApiResponse<{ categories: BeautyCategory[]; totalPages: number; currentPage: number; total: number }>> {
+    const searchParams = new URLSearchParams();
+    
+    Object.entries(params).forEach(([key, value]) => {
+      if (value !== undefined && value !== null) {
+        searchParams.append(key, value.toString());
+      }
+    });
+
+    const queryString = searchParams.toString();
+    const endpoint = `/beauty-categories${queryString ? `?${queryString}` : ''}`;
+    
+    return this.request<{ categories: BeautyCategory[]; totalPages: number; currentPage: number; total: number }>(endpoint);
+  }
+
+  async getBeautyCategoryById(id: string): Promise<ApiResponse<{ category: BeautyCategory }>> {
+    return this.request<{ category: BeautyCategory }>(`/beauty-categories/${id}`);
+  }
+
+  // Routine Categories API (Beauty Section)
+  async getRoutineCategories(params: {
+    page?: number;
+    limit?: number;
+    sort?: string;
+    order?: 'asc' | 'desc';
+  } = {}): Promise<ApiResponse<{ categories: RoutineCategory[]; totalPages: number; currentPage: number; total: number }>> {
+    const searchParams = new URLSearchParams();
+    
+    Object.entries(params).forEach(([key, value]) => {
+      if (value !== undefined && value !== null) {
+        searchParams.append(key, value.toString());
+      }
+    });
+
+    const queryString = searchParams.toString();
+    const endpoint = `/routine-categories${queryString ? `?${queryString}` : ''}`;
+    
+    return this.request<{ categories: RoutineCategory[]; totalPages: number; currentPage: number; total: number }>(endpoint);
+  }
+
+  async getRoutineCategoryById(id: string): Promise<ApiResponse<{ category: RoutineCategory }>> {
+    return this.request<{ category: RoutineCategory }>(`/routine-categories/${id}`);
+  }
+
+  // Winter Categories API
+  async getWinterCategories(params: {
+    page?: number;
+    limit?: number;
+    sort?: string;
+    order?: 'asc' | 'desc';
+  } = {}): Promise<ApiResponse<{ categories: WinterCategory[]; totalPages: number; currentPage: number; total: number }>> {
+    const searchParams = new URLSearchParams();
+    Object.entries(params).forEach(([key, value]) => {
+      if (value !== undefined && value !== null) {
+        searchParams.append(key, value.toString());
+      }
+    });
+    const queryString = searchParams.toString();
+    const endpoint = `/winter-categories${queryString ? `?${queryString}` : ''}`;
+    return this.request<{ categories: WinterCategory[]; totalPages: number; currentPage: number; total: number }>(endpoint);
+  }
+
+  async getWinterCategoryById(id: string): Promise<ApiResponse<{ category: WinterCategory }>> {
+    return this.request<{ category: WinterCategory }>(`/winter-categories/${id}`);
+  }
+
+  // Summer Categories API
+  async getSummerCategories(params: {
+    page?: number;
+    limit?: number;
+    sort?: string;
+    order?: 'asc' | 'desc';
+  } = {}): Promise<ApiResponse<{ categories: SummerCategory[]; totalPages: number; currentPage: number; total: number }>> {
+    const searchParams = new URLSearchParams();
+    Object.entries(params).forEach(([key, value]) => {
+      if (value !== undefined && value !== null) {
+        searchParams.append(key, value.toString());
+      }
+    });
+    const queryString = searchParams.toString();
+    const endpoint = `/summer-categories${queryString ? `?${queryString}` : ''}`;
+    return this.request<{ categories: SummerCategory[]; totalPages: number; currentPage: number; total: number }>(endpoint);
+  }
+
+  async getSummerCategoryById(id: string): Promise<ApiResponse<{ category: SummerCategory }>> {
+    return this.request<{ category: SummerCategory }>(`/summer-categories/${id}`);
+  }
+
+  // Cloth Categories API
+  async getClothCategories(params: {
+    page?: number;
+    limit?: number;
+    sort?: string;
+    order?: 'asc' | 'desc';
+  } = {}): Promise<ApiResponse<{ categories: ClothCategory[]; totalPages: number; currentPage: number; total: number }>> {
+    const searchParams = new URLSearchParams();
+    Object.entries(params).forEach(([key, value]) => {
+      if (value !== undefined && value !== null) {
+        searchParams.append(key, value.toString());
+      }
+    });
+    const queryString = searchParams.toString();
+    const endpoint = `/cloth-categories${queryString ? `?${queryString}` : ''}`;
+    return this.request<{ categories: ClothCategory[]; totalPages: number; currentPage: number; total: number }>(endpoint);
+  }
+
+  async getClothCategoryById(id: string): Promise<ApiResponse<{ category: ClothCategory }>> {
+    return this.request<{ category: ClothCategory }>(`/cloth-categories/${id}`);
+  }
+
+  // Woman Care Categories API
+  async getWomanCareCategories(params: {
+    page?: number;
+    limit?: number;
+    sort?: string;
+    order?: 'asc' | 'desc';
+  } = {}): Promise<ApiResponse<{ categories: WomanCareCategory[]; totalPages: number; currentPage: number; total: number }>> {
+    const searchParams = new URLSearchParams();
+    Object.entries(params).forEach(([key, value]) => {
+      if (value !== undefined && value !== null) {
+        searchParams.append(key, value.toString());
+      }
+    });
+    const queryString = searchParams.toString();
+    const endpoint = `/woman-care-categories${queryString ? `?${queryString}` : ''}`;
+    return this.request<{ categories: WomanCareCategory[]; totalPages: number; currentPage: number; total: number }>(endpoint);
+  }
+
+  async getWomanCareCategoryById(id: string): Promise<ApiResponse<{ category: WomanCareCategory }>> {
+    return this.request<{ category: WomanCareCategory }>(`/woman-care-categories/${id}`);
+  }
+
+  // Kids Categories API
+  async getKidsCategories(params: {
+    page?: number;
+    limit?: number;
+    sort?: string;
+    order?: 'asc' | 'desc';
+  } = {}): Promise<ApiResponse<{ categories: KidsCategory[]; totalPages: number; currentPage: number; total: number }>> {
+    const searchParams = new URLSearchParams();
+    Object.entries(params).forEach(([key, value]) => {
+      if (value !== undefined && value !== null) {
+        searchParams.append(key, value.toString());
+      }
+    });
+    const queryString = searchParams.toString();
+    const endpoint = `/kids-categories${queryString ? `?${queryString}` : ''}`;
+    return this.request<{ categories: KidsCategory[]; totalPages: number; currentPage: number; total: number }>(endpoint);
+  }
+
+  async getKidsCategoryById(id: string): Promise<ApiResponse<{ category: KidsCategory }>> {
+    return this.request<{ category: KidsCategory }>(`/kids-categories/${id}`);
+  }
+
+  // Perfume Categories API
+  async getPerfumeCategories(params: {
+    page?: number;
+    limit?: number;
+    sort?: string;
+    order?: 'asc' | 'desc';
+  } = {}): Promise<ApiResponse<{ categories: PerfumeCategory[]; totalPages: number; currentPage: number; total: number }>> {
+    const searchParams = new URLSearchParams();
+    Object.entries(params).forEach(([key, value]) => {
+      if (value !== undefined && value !== null) {
+        searchParams.append(key, value.toString());
+      }
+    });
+    const queryString = searchParams.toString();
+    const endpoint = `/perfume-categories${queryString ? `?${queryString}` : ''}`;
+    return this.request<{ categories: PerfumeCategory[]; totalPages: number; currentPage: number; total: number }>(endpoint);
+  }
+
+  async getPerfumeCategoryById(id: string): Promise<ApiResponse<{ category: PerfumeCategory }>> {
+    return this.request<{ category: PerfumeCategory }>(`/perfume-categories/${id}`);
   }
 
   // Health check
