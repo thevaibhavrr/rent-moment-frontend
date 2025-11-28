@@ -1,9 +1,10 @@
 // const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://cloth-backend-tpce.onrender.com/api';
 // const API_BASE_URL = 'https://rent-moment-backend.onrender.com/api';
 // const API_BASE_URL = 'https://rent-moment-backend-971455500628.asia-south1.run.app/api';
-// raiway - https://rent-moment-backend-production.up.railway.app/
 
 const API_BASE_URL = 'https://rent-moment-backend-production.up.railway.app/api';
+
+
 
 export interface Product {
   _id: string;
@@ -11,7 +12,7 @@ export interface Product {
   description: string;
   images: string[];
   price: number;
-  originalPrice: number;
+  originalPrice: number;   
   deposit?: number;
   color: string;
   sizes: Array<{
