@@ -2,7 +2,7 @@
 // const API_BASE_URL = 'https://rent-moment-backend.onrender.com/api';
 // const API_BASE_URL = 'https://rent-moment-backend-971455500628.asia-south1.run.app/api';
 
-const API_BASE_URL = 'https://rent-moment-backend-production.up.railway.app/api';
+const API_BASE_URL = 'https://rent-moment-backend-production-8cc3.up.railway.app/api';
 
 
 
