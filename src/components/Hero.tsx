@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useHighlightedProducts } from '../hooks/useHighlightedProducts';
 import ProductCarousel3D from './ProductCarousel3D';
 import ProductNavigation from './ProductNavigation';
+import NewYear2026 from './NewYear2026';
 import { Product } from '../services/api';
 
 const Hero = () => {
@@ -50,6 +51,7 @@ const Hero = () => {
   if (loading) {
     return (
       <section className="relative h-[80vh] md:h-[70vh] lg:h-[80vh] overflow-hidden flex items-center justify-center" style={{marginTop: '10px'}}>
+        <NewYear2026 />
         <div className="text-center text-white">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gold mx-auto mb-4"></div>
           <p className="text-lg">Loading featured products...</p>
@@ -80,6 +82,7 @@ const Hero = () => {
 
     return (
       <section className="relative h-[75vh] overflow-hidden" >
+        <NewYear2026 />
         <div className="absolute inset-0">
           {/* Auto-sliding image carousel */}
           <div className="relative w-full h-full">
@@ -207,6 +210,7 @@ const Hero = () => {
 
   return (
     <section className="relative h-[75vh] overflow-hidden" style={{marginTop: '10px'}}>
+      <NewYear2026 />
       {/* Enhanced Background with Product Carousel */}
       <div className="absolute inset-0">
         <ProductCarousel3D 
